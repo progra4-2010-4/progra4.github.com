@@ -1,0 +1,36 @@
+
+body{
+    font-family: Verdana, Helvetica, sans-serif; 
+    font-size: 17px;
+    background: #eeefef url(/images/fg.png) repeat 50% 50%;
+    color: $primary;
+    text-rendering: optimizeLegibility;
+    margin: 0;
+    padding: 0;
+}
+
+.post{
+    text-shadow:  white 0px 1px 0px;
+}
+
+#header{
+    background: #bbbaba url(/images/fg_dark.gif) repeat;
+    color: #504f4f;
+    text-shadow: 0px 2px 1px #bbbaba;
+    top: 0;
+}
+
+#header a{
+    color: #444;
+    text-decoration: none;
+}
+
+#content{
+    margin: 0 auto;
+    width: 80%;
+}
+
+pre{
+    background-color: ghostWhite !important;
+    border: 1px solid #DEDEDE !important;
+}

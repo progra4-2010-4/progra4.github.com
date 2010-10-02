@@ -1,7 +1,14 @@
-<!DOCTYPE>
-<head>
-    <title>Progra4: Serious Business</title>
-</head>
-<body>
-    <h1>Progra4: coming soon</h1>
-</body>
+---
+layout: base
+title: el nerdlog de progra 4
+---
+
+<h2>Guías y notas</h2>
+<ul id="posts" class="left-container">
+    {%for post in site.posts%}
+        <li class="post">{{post.date|date_to_string}}: <a href="{{post.url}}">{{post.title}}</a></li>
+    {%endfor%}
+</ul>
+
+<ul id="presentations" class="right-container">
+</ul>
