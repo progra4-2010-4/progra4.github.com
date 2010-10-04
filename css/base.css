@@ -25,12 +25,19 @@ body{
     min-height: 50px;
 
 }
-
+#header h1{
+    display: inline;
+}
 #header a{
     color: #504f4f;
     text-decoration: none;
 }
 
+#header a.right{
+    float: right;
+    padding-top: 5px;
+    
+}
 #header a:hover {
     color: #666;
     text-shadow: 0px 2px 1px #333;
