@@ -49,6 +49,12 @@ Para instalar rubygems, aunque está disponible como paquete de aptitude (instal
     cd rubygems-1.3.7
     sudo ruby setup.rb
 
+Probablemente el comando no sea instalado como `gem`, sino que como `gem1.8`, (para probarlo, ejecuten `gem -v`, si les dice que el comando no se encuentra, prueben con `gem1.8 -v`, debería imprimir `1.3.7`) Para no tener que estar escribiendo `gem1.8`, pueden hacer lo siguiente:
+
+    echo "gem=gem1.8" >> ~/.bashrc_aliases
+    . ~/.bashrc_aliases
+
+
 Para instalar sqlite:
 
     sudo apt-get install sqlite
