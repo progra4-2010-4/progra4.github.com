@@ -6,9 +6,19 @@ title: el nerdlog de progra 4
 <h2>Guías y notas</h2>
 <ul id="posts" class="left-container">
     {%for post in site.posts%}
-        <li class="post">{{post.date|date_to_string}}: <a href="{{post.url}}">{{post.title}}</a></li>
+        <li class="post">{{post.date|date_to_string}}: 
+            <a href="{{post.url}}">{{post.title}}</a>
+            <small><a href="{{post.url}}#disqus_thread">Comentarios</a></small>
+        </li>
     {%endfor%}
 </ul>
 
-<ul id="presentations" class="right-container">
-</ul>
+<script type="text/javascript">
+var disqus_shortname = 'progra4';
+(function () {
+  var s = document.createElement('script'); s.async = true;
+  s.src = 'http://disqus.com/forums/progra4/count.js';
+  (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
