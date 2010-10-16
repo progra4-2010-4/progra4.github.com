@@ -17,89 +17,112 @@ Por último se requiere que se tenga creada una cuenta en [heroku.com](http://he
 
 Para familiarizarse con git, se puede leer este [tutorial/sitio de referencia](http://gitref.org/) escrito por uno de los creadores de github.com.
 
+##Preludio##
+
+En esta guía usaré un repositorio de ejemplo llamado `ejemplo_heroku`. Los integrantes del grupo son [John Galt](http://github.com/jgalt) y [Luis Borjas](http://github.com/lfborjas). El repositorio original es `progra4/ejemplo_heroku`. Cada uno de ellos hará una copia remota de ese y luego la clonará a su computadora personal. Estarán siguiendo el modelo distribuido de trabajo: ambos tienen copias remotas y actualizan sus propios cambios a ellas, trayendo ocasionalmente cambios del otro y actualizando el repositorio original en las etapas de *integración*. Ese modelo de trabajo  encontrar explicado [aquí (Integration manager workflow)](http://whygitisbetterthanx.com/#any-workflow), donde ambos cumplen el rol de `developer` e `integration manager`. Esa manera de trabajar se puede resumir en la siguiente ilustración:
+
+![Integration manager wf](http://whygitisbetterthanx.com/images/workflow-b.png)
+
+A continuación, detallaré la historia desde cómo cada uno de ellos hará sus copias locales y trabajará hasta la primera publicación de su proyecto en internet mediante [heroku.com](http://heroku.com).
+
 ##Encontrando el repositorio de tu grupo##
 
-En esta guía estaremos trabajando sobre el contexto de progra4: cuando uno entra a github.com se encuentra con un *dashboard* o "pizarra", para los que lo tienen en español. Ese dashboard corresponde a nuestra cuenta, tiene una lista de nuestros repositorios, noticias de programadores que seguimos, etc. **Pero**, vamos a querer cambiarnos de contexto, para, en vez de ver nuestras cosas personales, ver lo de progra 4: así que al entrar a github, veríamos una pantalla así:
+Si fuéramos el usuario `jgalt` al entrar a github.com veríamos un *dashboard* o "pizarra", para los que lo tienen en español. Ese dashboard corresponde a la cuenta personal de `jgalt`, tiene una lista de sus repositorios, noticias de programadores que sigue, etc. **Pero**, se cambiará de contexto, para, en vez de ver sus cosas personales, ver lo de progra 4: así que al entrar a github, vería una pantalla así (nótese el menú de cambio de contexto en la parte media derecha):
 
 ![Entrando a github](http://farm5.static.flickr.com/4145/5085547406_b35fa924c4.jpg)
 
-Si damos click en progra4, estaríamos cambiándonos de contexto y veríamos algo así:
+En el menú de cambio de contexto, si da click en progra4, estaría cambiándose de contexto y vería algo así:
 
 ![Cambio de contexto](http://farm5.static.flickr.com/4083/5084974167_81c2e72035.jpg)
 
-Como se ve en la imagen, ahora podés ver noticias de lo que pase en la [organización](http://github.com/blog/674-introducing-organizations) progra4 y una lista de los repositorios a los que tenés acceso. Da click en el repositorio que tenga el nombre de tu grupo (en la imagen, el grupo era `ejemplo_heroku`) de modo que si das click en el nombre de éste verás lo siguiente:
+Como se ve en la imagen, ahora John Galt ve noticias de lo que pasa en la [organización](http://github.com/blog/674-introducing-organizations) progra4 y una lista de los repositorios a los que tiene acceso. Al dar click en el repositorio que tiene el nombre de su grupo (en la imagen, el grupo es `ejemplo_heroku`) John Galt vería lo siguiente:
 
 ![Viendo el repositorio del grupo](http://farm5.static.flickr.com/4109/5085602426_65881b84f3.jpg)
 
-En este y en cualquier repositorio que tengás acceso podés notar dos cosas:
+En este y en cualquier repositorio que se tenga acceso se pueden notar dos cosas:
 
-1. Hay un botón que te permite **hacer una copia (fork)** del repositorio, eso implica poner un nuevo repositorio *a tu nombre* basado en el que estas viendo. 
-2. Hay una **url de protocolo git**, con esta, podés *agregar el repositorio que estás viendo como un remoto* y así poder hacer `pull` y hasta `push` (si tenés permiso, como es el caso del repositorio de tu grupo).
+1. Hay un botón que permite **hacer una copia (fork)** del repositorio, eso implica poner un nuevo repositorio *a nombre de uno* basado en el que se está viendo. 
+2. Hay una **url de protocolo git**, con esta, se puede  *agregar el repositorio que se está viendo como un remoto* y así poder hacer `pull` y hasta `push` (si se tiene permiso, como es el caso del repositorio del grupo de John Galt).
 
-##Paso 1: crear tu propia copia remota del repositorio del grupo##
+##Crear tu propia copia remota del repositorio del grupo##
 
-Ahora que ya encontraste el repositorio de tu grupo, harás una copia remota: de esta manera, tendrás tu propia versión del repositorio original sobre la cual podrás hacer cambios (teniendo el respaldo en internet) sin preocuparte por *arruinar el código para los demás*. Esa es una de las ventajas de git: **permite trabajar de manera no centralizada** (a diferencia de [otros sistemas de control de versiones](http://whygitisbetterthanx.com/#distributed)).
+Ahora que John Galt encontró el repositorio de su grupo, hará una copia remota: de esta manera, tendrá su propia versión del repositorio original sobre la cual podrá hacer cambios (teniendo el respaldo en internet) sin preocuparse por *arruinar el código para los demás*. Esa es una de las ventajas de git: **permite trabajar de manera no centralizada** (a diferencia de [otros sistemas de control de versiones](http://whygitisbetterthanx.com/#distributed)).
 
-Para hacer la copia remota, das click en el botón de `fork` (o `hacer copia`) y verás algo como esto:
+Para hacer la copia remota, John Galt da click en el botón de `fork` (o `hacer copia`) y ve algo como esto:
 
 ![Luego de un fork](http://farm5.static.flickr.com/4103/5085045531_2654de18b3.jpg)
 
-##Paso 2: crear una copia local del fork que acabás de hacer##
+##Crear una copia local del fork que acabás de hacer##
 
-Ok, ya tenés tu copia remota del repositorio original de tu grupo. Pero aquí lo más que podés hacer es ver código y el historial de cambios, y vos lo que querés es ¡comenzar a trabajar!. Excelente. Hagamos una copia local.
+Ok, John Galt ya tiene su copia remota del repositorio original de su grupo (Luis Borjas también tiene una). Pero aquí lo más que puede hacer es ver código y el historial de cambios, y John Galt lo que quiere es ¡comenzar a trabajar!. Excelente. Hora de hacer una copia local.
 
-Como verás en la foto de arriba, hay una url de git ahí donde hiciste el fork, copiala al portapapeles. Luego, andate en tu terminal a una carpeta donde querás hacer el clon (en el caso de este usuario, será `/home/lfborjas/johngalt`) y ahí ejecutá lo siguiente:
+John Galt nota, como se ve en la foto de arriba, que hay una url de git ahí donde hizo el fork, así que la copiará al portapapeles. Abre una terminal y hace `cd` a una carpeta donde hará hacer el clon (en el caso de este usuario, será `/home/johngalt/proyectos`) y ahí ejecuta lo siguiente:
 
     git clone git@github.com:jgalt/ejemplo_heroku.git
 
 Si todo sale bien, debería aparecer algo muy similar a esto:
 
-    Initialized empty Git repository in /home/lfborjas/johngalt/ejemplo_heroku/.git/
+    Initialized empty Git repository in /home/johngalt/proyectos/ejemplo_heroku/.git/
     remote: Counting objects: 39, done.
     remote: Compressing objects: 100% (21/21), done.
     remote: Total 39 (delta 15), reused 39 (delta 15)
     Receiving objects: 100% (39/39), 6.53 KiB, done.
     Resolving deltas: 100% (15/15), done.
 
-Ahora vas a tener una carpeta llamada igual que el repositorio que acabás de clonar (en este ejemplo, la carpeta es `ejemplo_heroku`). Andate a ella: **es tu nueva copia local de tu proyecto, de ahora en adelante, todos los comandos se asumirá que los ejecutás dentro de ésta**.
+Ahora John Galt tiene una carpeta llamada igual que el repositorio que acaba de clonar (en este ejemplo, la carpeta es `ejemplo_heroku`). Se cambia a esa carpeta (ejecuta `cd ejemplo_heroku`) **y se encuentra dentro de su nueva copia local del proyecto, de ahora en adelante, todos los comandos se asumirá que los ejecuta dentro de ésta**.
 
-##Paso 3: agregar a tus compañeros como remotos##
+##Agregar a tus compañeros como remotos##
 
-Una vez que tenés tu copia local, si ejecutás esto
+En su nueva copia local, si Galt ejecuta esto
     
     git remote
 
-Te saldría lo siguiente
+Le saldría lo siguiente
     
     origin
 
-Esto quiere decir que tenés un apuntador a un repositorio remoto: tu propia copia remota. Pero esto de remote es más poderoso que eso: podés tener apuntadores a las **copias remotas de tus compañeros y al mismísimo repositorio original**. 
+Esto quiere decir que tiene un *apuntador* a un repositorio remoto: **su** propia copia remota. Pero esto de `remote` es más poderoso que eso: puede tener apuntadores a las **copias remotas de sus compañeros y al mismísimo repositorio original (el blessed repository)**. 
 
-En el ejemplo que estamos viendo, hay dos miembros en el grupo: John Galt y Luis Borjas. Digamos que el apodo de Luis Borjas es `luisfelipe` y el de John Galt es `galt`. Estas dos personas quieren tener en su lista de repositorios remotos al otro. SiLuis Felipe quisiera hacerlo, ejecutaría algo como esto:
+Digamos que el apodo de Luis Borjas es `luisfelipe` y el de John Galt es `galt`. Estas dos personas quieren tener en su lista de repositorios remotos al otro. Nuestro John Galt quiere agregar al repositorio de Luis Felipe como remoto (nótese que esto no es un clon ni nada, sólo una referencia a otro repositorio, útil, como veremos después, para traer cambios de allá e integrarlos con los propios). En fin, para agregar la referencia a la copia remota de Luis Borjas, Galt ejecuta algo como esto:
 
-    git remote add galt git@github.com:jgalt/ejemplo_heroku.git
+    git remote add luisfelipe git@github.com:lfborjas/ejemplo_heroku.git
 
 Y, al ejecutar `git remote` para listar sus remotos, vería algo como esto:
 
     origin
-    galt
+    luisfelipe
 
-Y John Galt (y cualquier otro miembro del grupo) podría hacer eso para cuantas personas quiera. Nótese que el último parámetro del comando es una **URI de copia**, como la que vimos en la foto del fork.
+Si quisiera también tener una referencia al repositorio original (para cuando le toque hacer integraciones) ejecutaría algo como esto:
+    
+    git remote add blessed_repo git@github.com:progra4/ejemplo_heroku.git
 
-## Paso 4: hacer tus propios cambios, actualizar tu copia remota con ellos y traer los cambios de otros##
+Y la ejecución de `git remote` ahora resultaría en
+    
+    origin
+    luisfelipe
+    blessed_repo
+
+
+Y también Luis Borjas (y cualquier otro miembro del grupo) podría hacer algo como eso para cuantas personas quiera. Nótese que el último parámetro del comando es una **URI de copia**, como la que vimos en la foto del fork.
+
+Todo esto que acabamos de hacer (tener una copia remota, hacer un clon local y agregar referencias a otros repositorios para integración) se puede apreciar en el siguiente diagrama:
+
+![El modelo de integración](http://www.gliffy.com/pubdoc/2280827/L.png)
+
+## Hacer tus propios cambios, actualizar tu copia remota con ellos y traer los cambios de otros##
 
 El flujo de trabajo de git es sencillo
 
-1. Editás uno o varios archivos: estos cambios se mantienen en algo conocido como `directorio de trabajo`
-2. Ves qué cambios has hecho con `git status` y qué ha cambiado con `git diff`
-3. Cuando creás que los cambios que hiciste sobre uno o más archivos están bien, hacés un `git add`: en esta etapa pasarán a una etapa conocida como `índice`: le estás diciendo a git que esté pendiente de esos cambios.
-4. Cuando querás "guardar" en el historial permantente (en terminología de git, se conoce como el `repositorio`), ejecutarás n `git commit`: los cambios se hacen definitivos y se agregan a tu historia de cambios.
-5. Cuando querás actualizar el historial de tu copia remota -todos los commits que has hecho en una sesión de trabajo- vas a ejecutar un `git push`: de esta manera sincronizarás los cambios locales con el historial remoto.
-6. Cuando querás traer los cambios de otros a tu copia local, hacés `git pull`
+1. Uno edita uno o varios archivos: estos cambios se mantienen en algo conocido como `directorio de trabajo`
+2. Uno ve qué cambios ha hecho con `git status` y qué ha cambiado con `git diff`
+3. Cuando uno considere que los cambios que hizo sobre uno o más archivos están bien, hace un `git add`: en esta etapa pasarán a una etapa conocida como `índice`: le estás diciendo a git que esté pendiente de esos cambios.
+4. Cuando uno quiere "guardar" en el historial permantente (en terminología de git, se conoce como el `repositorio`), ejecutará un `git commit`: los cambios se hacen definitivos y se agregan a la historia de cambios.
+5. Cuando uno quiere actualizar el historial de su copia remota -todos los commits que ha hecho en una sesión de trabajo- ejecuta un `git push`: de esta manera se sincronizan los cambios locales con el historial remoto.
+6. Cuando uno quiera traer los cambios de otros a tu copia local (integrar), hace un `git pull`
 
 ###Haciendo cambios y guardándolos en el historial###
 
-Por ejemplo, John Galt, quien hizo su propia copia local del repositorio `jgalt/ejemplo_heroku`, decide editar el archivo `app.rb`. Cuando termina de editarlo, ejecuta `git status` y ve algo como esto:
+John Galt, quien hizo su propia copia local del repositorio `jgalt/ejemplo_heroku`, decide editar el archivo `app.rb`. Cuando termina de editarlo, ejecuta `git status` y ve algo como esto:
 
     # On branch master
     # Changed but not updated:
@@ -160,7 +183,7 @@ En cualquier momento de la sesión de trabajo, se puede ejecutar `git log` para 
 
 ###Actualizando tu copia remota con los cambios de tu copia local ###
 
-Ahora, John Galt está a punto de apagar su computadora porque el trabajo fue extenuante, de modo que antes quiere dejar sincronizada sus copia local y remotas. Para eso, ejecuta el comando `git push origin master` y ve algo como esto:
+Ahora, John Galt está a punto de apagar su computadora porque el trabajo fue extenuante, de modo que antes quiere dejar sincronizadas sus copias local y remota. Para eso, ejecuta el comando `git push origin master` y ve algo como esto:
 
     Counting objects: 9, done.
     Delta compression using up to 2 threads.
@@ -170,11 +193,13 @@ Ahora, John Galt está a punto de apagar su computadora porque el trabajo fue ex
     To git@github.com:jgalt/ejemplo_heroku.git
        625f15a..7e59ec1  master -> master
 
+Ahora la copia que está guardada en github.com está sincronizada con la local.
+
 ### Actualizando tu copia local con los cambios de las copias remotas de tus compañeros ###
 
-En la madrugada, ve en el newsfeed de github.com que Luis Borjas hizo un push a su copia remota, revisa los cambios y se da cuenta que son importantes. Así que ejecuta lo siguiente
+En la madrugada, Galt ve en el newsfeed de github.com que Luis Borjas hizo un push a su copia remota, revisa esos cambios (en github.com se puede dar click en un commit y ver qué archivos se cambiaron y qué se cambió en cada uno) y se da cuenta que son importantes. Así que ejecuta lo siguiente
 
-    git pull luisfelipe
+    git pull luisfelipe master
 
 Y en la terminal ve algo como esto:
 
@@ -189,7 +214,7 @@ Y en la terminal ve algo como esto:
         1 files changed, 1 insertions(+), 1 deletions(-)
 
 
-Luis Borjas cambió otro archivo y ahora John Galt **actualizó su copia local** con lo que Luis Felipe hizo en su copia remota. Ahora ambos tienen la misma versión del código.
+Luis Borjas cambió otro archivo y ahora John Galt **actualizó su copia local** con lo que Luis Felipe hizo en su copia remota. Ahora ambos tienen la misma versión del código: John Galt **integró** su código y el de Luis Felipe.
 
 ###Resumen del flujo de trabajo###
 
@@ -199,7 +224,7 @@ El flujo de trabajo se puede ver gráficamente así:
 
 ###Resolución de conflictos###
 
-Pero no todo es felicidad en el mundo de git: a veces más de una persona trabaja en un archivo y todo se pone ... interesante.
+Pero no todo es felicidad en el mundo de git: a veces más de una persona trabaja en un mismo archivo que otras y todo se pone ... interesante.
 
 Digamos que esta vez Luis Borjas decide trabajar en el archivo `app.rb` y hace un commit de sus cambios. Pero, hace unos párrafos, vimos que John Galt también había trabajado en ese archivo, y, para colmo, Luis Borjas no ha actualizado su copia local con los cambios que John hizo. Se da cuenta que John Galt hizo esos cambios y decide ejecutar esto:
 
@@ -245,30 +270,34 @@ En efecto, git le está diciendo que ambos tocaron ese archivo y le está pidien
 
 Como se ve, todo lo que está entre separadores etiquetado como `HEAD` es lo que Luis hizo. Y lo que está en la otra porción, lo que John Galt hizo. Luis acepta que el código de Galt es mejor, así que decide borrar la porción suya y dejar la de Galt. Para terminar, hace un `commit` para decirle a git que ya resolvió el conflicto y todo está bien otra vez.
 
-##Paso 5: publicar tu aplicación a heroku##
+###Integración de cambios###
 
-Ok, ya hemos trabajado y todo está bien, uno de los miembros del grupo tiene los últimos cambios y estamos listos para publicar nuestra webapp en internet.
+Recordemos que el modelo de trabajo que John Galt y Luis Borjas están usando es uno distribuido: ambos tienen referencias a sus propias copias remotas (listadas como `origin`), referencias al otro (en la computadora de John Galt, la referencia al repositorio de Luis Borjas está listada como  `luisfelipe`) y una referencia al repositorio original (a la cual le pusieron `blessed_repo`). Al final de la semana, John Galt ejecuta un `git pull luisfelipe master` para integrar los cambios de Luis Borjas a los suyos y descubre que la aplicación funciona perfectamente (luego de resolver un par de conflictos). Llama a Luis y deciden que hoy él será el *integrador*: subirá esta versión del proyecto al repositorio original.
+Así que ejecuta `git push blessed_repo master` y de este modo esta versión estable del proyecto está en el repositorio original y ambos pueden ejecutar un `git pull blessed_repo master` para obtenerla. La otra semana, Luis podría jugar el papel de integrador, no importa quién lo haga, lo que importa es que **sólo hagan push a ese repositorio de versiones estables del proyecto**. Las versiones inestables las pueden mantener perfectamente en sus copias remotas personales; así, si alguno cambia de computadora o quiere saber qué fue lo último estable que el grupo decidió, puede hacer un pull.
+
+##Publicar la aplicación a heroku##
+
+En algún punto,  alguno de los miembros del grupo **hizo integración** y tiene los últimos cambios (se dedicó a hacer `pull` de los repositorios de sus compañeros y quizá decidieron juntos qué solución darle a los conflictos, haciendo, al final, `push` al `blessed_repo` que es el repositorio de integración, donde siempre ponen las versiones estables del código) y están listos para publicar su webapp en internet.
 
 Fácil.
 
-Siempre dentro de la carpeta de tu aplicación (asumiendo que tenés cuenta en heroku.com y el gem de heroku instalado), ejecutás lo siguiente
-(En este ejemplo, el equipo se llama `fountainheads`, el parámetro del comando `create` es el nombre que le querés poner a tu aplicación): 
+John Galt va a su carpeta de proyecto (ejecuta `cd /home/johngalt/proyectos/ejemplo_heroku`) y decide crear una aplicación en heroku llamada `fountainheads`, de modo que ejecuta el siguiente comando:
 
     heroku create fountainheads
 
-Si todo sale bien (quizá te pida que te autentiqués a heroku si es la primera vez), verías algo como esto:
+Si todo sale bien (quizá en tu caso te pida que te autentiqués a heroku si es la primera vez), Galt ve algo como esto:
 
     Creating fountainheads.... done
     Created http://fountainheads.heroku.com/ | git@heroku.com:fountainheads.git
     Git remote heroku added
 
-Lo que acaba de pasar es que creamos *otro repositorio remoto*, pero esta vez, está guardado en heroku.com. Si John Galt, que es quien corrió este comando, ejecutase `git remote`, vería esto:
+Lo que acaba de pasar es que Galt creó  *otro repositorio remoto*, pero esta vez, está guardado en heroku.com. Si ejecutase `git remote`, vería esto:
 
     origin
     heroku
     luisfelipe
 
-Estamos a un paso de publicar nuestra aplicación hecha en sinatra a heroku.com. Pero nos falta una cosa: crear dos archivos que heroku necesita para detectar que lo que subamos es una aplicación web hecha en sinatra.
+Galt está a un paso de publicar nuestra su aplicación hecha en sinatra a heroku.com. Pero falta una cosa: crear dos archivos que heroku necesita para detectar que lo que subimos es una aplicación web hecha en sinatra.
 
 El primer archivo se debe llamar `config.ru` y contener esto:
 
@@ -281,14 +310,14 @@ El siguiente se debe llamar `.gems` y contener esto:
 
     sinatra
 
-Este archivo declara *de qué gems de ruby depende nuestra aplicación*. Que, en el caso precedente, sólo depende de la gem `sinatra`.
+Este archivo declara *de qué gems de ruby depende nuestra aplicación*. Que, en el caso precedente, sólo depende de la gem `sinatra`. Si usásemos otra gem, por ejemplo, [hpricot](http://hpricot.com/), el archivo también contendría `hpricot` en una nueva línea.
 
-Agregamos ambos archivos a nuestro repositorio y hacemos un nuevo commit:
+Galt agrega ambos archivos a su repositorio y hace un nuevo commit:
     
     git add .gems config.ru
     git commit -m "¡Listos para heroku!"
 
-Hacemos otro push común y corriente, pero esta vez la terminal nos dirá algo distinto:
+Para subir la app a heroku, sólo hace otro push común y corriente, pero esta vez la terminal dirá algo distinto:
 
     Counting objects: 61, done.
     Delta compression using up to 2 threads.
@@ -311,9 +340,8 @@ Hacemos otro push común y corriente, pero esta vez la terminal nos dirá algo d
      * [new branch]      master -> master
    
 
-Nótese cómo nos dice que se detectó una app de sinatra y que la puso en la dirección <http://fountainheads.heroku.com>. ¡Listo! ¡Ahora todo mundo puede ver nuestra aplicación!
+Nótese cómo nos dice que se detectó una app de sinatra y que la puso en la dirección <http://fountainheads.heroku.com>. ¡Listo! ¡Ahora todo mundo puede ver la aplicación de este grupo!
 
+Para sacarle provecho a git, se recomienda leer el [tutorial recomendado por github](http://gitref.org) y quizá el [artículo de uno de los creadores de github](http://tom.preston-werner.com/2009/05/19/the-git-parable.html) sobre la razón de ser de git.
 
-
-
-
+Para ayuda sobre los distintos aspectos de github, se recomienda la [ayuda oficial](http://help.github.com/). Y para guías sobre varios temas en heroku, está [la documentación](http://docs.heroku.com/).
