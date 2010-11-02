@@ -1,3 +1,7 @@
+---
+layout: post
+title: Desarrollo orientado a pruebas en Ruby on Rails 
+---
 ## TDD
 
 La técnica de desarrollo orientado por pruebas (TDD por sus siglas en inglés) dice que deberías empezar haciendo pruebas antes de hacer el código. Y ruby on rails tiene muchas [facilidades para ello](http://guides.rubyonrails.org/testing.html). 
