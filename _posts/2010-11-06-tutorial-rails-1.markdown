@@ -102,3 +102,46 @@ Si todo sale bien, nuestra terminal debería imprimir algo como lo siguiente:
 ¡Listo! El primer commit de nuestro proyecto/tutorial está hecho, y se puede encontrar aquí: <https://github.com/lfborjas/coderumble/commit/2d4f312dc7afd614261687779bc69938c2633a1a>
 
 En la siguiente fase, agregaremos autenticación de usuarios al proyecto.
+
+###Anexo
+
+En el caso de los proyectos de programación 4, donde ya tenían un repositorio creado y una aplicación de sinatra, pueden hacer lo siguiente para usar el mismo repositorio en una aplicación nueva de ruby on rails:
+
+Primero, ir a la carpeta del proyecto y ver si hay cambios a los que no hayan hecho commit:
+
+    $ cd CARPETA_DEL_PROYECTO
+    $ git status
+    # On branch master
+    nothing to commit (working directory clean)
+
+Si no les sale `nothing to commit` sino que sale `changes to be commited...` o `untracked files`, ejecuten lo siguiente:
+
+    $ git add .
+    $ git commit -m "agregado todo lo de sinatra, antes de rails"
+
+Ahora, lo que vamos a hacer es crear una `branch` de git donde quedará guardado nuestro proyecto viejo, a la cual llamaremos sinatra. Esa branch la subiremos a github para tener respaldo:
+
+    $ git branch sinatra
+    $ git push origin sinatra
+
+Lo siguiente es dejar nuestro repositorio como nuevo para poder empezar con el proyecto de rails (**OJO, estas instrucciones borrarán todos nuestros archivos viejos de la branch "master" -por eso los guardamos en otra branch**):
+
+    $ git symbolic-ref HEAD refs/heads/master
+    $ rm .git/index
+    $ git clean -fdx
+
+Ahora, si ejecutamos `ls`, veremos que todos los archivos que git conocía desaparecieron (aunque si hacemos  `git checkout sinatra`, volverán a aparecer, porque están guardados para siempre en esa branch).
+
+Por último, creamos el proyecto de rails (**sin salirnos de la carpeta actual**):
+
+    $ rails new .
+
+Agregamos los archivos a git y hacemos un commit:
+
+    $ git add .
+    $ git commit -m 'creado desde cero en rails'
+
+Y hacemos un push (nótese el -f, que fuerza a git a sobreescribir la historia que ya estaba en el repositorio remoto):
+    
+    $ git push -f origin master
+
