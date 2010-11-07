@@ -151,7 +151,7 @@ Y, con nuestro editor de texto preferido, agregamos lo siguiente:
     end
     {%endhighlight%}
 
-El progreso hasta este punto está aquí: <https://github.com/lfborjas/coderumble/commit/11fe5a27079063102e8bbca4293095e0cab1e1fe>
+El progreso hasta este punto está [aquí en el historial de github](https://github.com/lfborjas/coderumble/commit/11fe5a27079063102e8bbca4293095e0cab1e1fe)
 
 ### Paso 4: definir rutas 
 
@@ -180,7 +180,7 @@ Esta vez, el error es *rojo*. Cucumber ya sabe que cuando decimos "voy a ..." no
     
 Lo que hicimos fue agregar el caso `when /la página raíz/` para decirle a cucumber que, cuando se encuentre esa frase, visite la raíz de nuestras rutas (`'/'`).
 
-El commit para este paso está aquí: <https://github.com/lfborjas/coderumble/commit/c913302243715da7d9dfa2206cb32692d5244903>
+El commit para este paso está [aquí en el historial de github](https://github.com/lfborjas/coderumble/commit/c913302243715da7d9dfa2206cb32692d5244903)
 
 Si volvemos a ejecutar `rake cucumber`, veremos algo como esto:
 
@@ -253,7 +253,7 @@ Dejando eso claro, nos damos cuenta de algo, podríamos agregar una llamada a la
 
 **¡Un problema!** si bien sabemos que la ruta raíz debería **pasarle el control** a *algo*, no sabemos a *qué*. Aquí entra la siguiente etapa:
 
-Un commit con este mísero cambio que hicimos está acá: <https://github.com/lfborjas/coderumble/commit/2598f22669b0d95c0693f69927df4fb3c7c42ea3>
+Un commit con este mísero cambio que hicimos está [acá en el historial de github](https://github.com/lfborjas/coderumble/commit/2598f22669b0d95c0693f69927df4fb3c7c42ea3)
 
 ###Paso 5: definir controladores
 
@@ -377,7 +377,7 @@ Pues sí, pasa. ¿Por qué? Porque en el escenario dijimos que:
 
 Nosotros *sabemos* que eso de "login" y "register" deberían ser enlaces a alguna página. Asi que ¿qué hacemos? ¿Acaso cambiamos el escenario para que sea más específico? No. Un escenario debería decir siempre el *qué* y no el *cómo*: si decimos que esas dos palabras están en enlaces, estamos diciendo *cómo diseñaríamos la página*. De modo que sólo nos queda especificar en otro lugar el comportamiento deseado. Es el turno de las pruebas funcionales.
 
-Nuestro trabajo hasta este punto está aquí: <https://github.com/lfborjas/coderumble/commit/ef12be96d06b935f8fe117500e6f9ded63b3e776>
+Nuestro trabajo hasta este punto está [aquí en el historial de github](https://github.com/lfborjas/coderumble/commit/ef12be96d06b935f8fe117500e6f9ded63b3e776)
 
 ###Paso 6: pruebas funcionales, para ver que los controladores hacen lo que tienen que hacer.
 
@@ -492,7 +492,7 @@ Listo, si corremos nuestro servidor, con `rails s`, veremos algo como esto:
 ![primera iteración](http://farm5.static.flickr.com/4042/5153010979_931654c5f4.jpg)
 
 
-El progreso hasta esta última está acá: <https://github.com/lfborjas/coderumble/commit/0188d6153ffb675de97a08fbcb58824eb058d5be>
+El progreso hasta esta última está [acá en el historial de github](https://github.com/lfborjas/coderumble/commit/0188d6153ffb675de97a08fbcb58824eb058d5be)
 
 ###Sumario
 
