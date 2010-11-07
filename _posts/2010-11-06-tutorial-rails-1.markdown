@@ -36,13 +36,14 @@ En los ejemplos referentes a la terminal, el signo de dolar (`$`) se refiere al 
 
 Como desarolladores, lo primero que haremos será crear el proyecto de ruby on rails, al cual llamaremos `coderumble`
 
-    $ rails new coderumble
-
+{%highlight console%}
+$ rails new coderumble
+{%endhighlight%}
 Lo cual creará una carpeta llamada `coderumble`. Si nos cambiamos a ella y vemos su contenido, veremos el esqueleto de una aplicación en rails:
 
 {%highlight console%}
 $ cd coderumble
-$ ls
+$ ls 
 app  config  config.ru  db  doc  Gemfile  lib  log  public  Rakefile
 README  script  test  tmp  vendor
 {%endhighlight%}
