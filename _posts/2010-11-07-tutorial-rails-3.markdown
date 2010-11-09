@@ -554,12 +554,12 @@ cucumber features/autenticar.feature:29 # Scenario: Un usuario autenticado entra
 
 ¿Cómo es eso? ¿*Sigue* fallando la autenticación? ¡Pero si le pusimos el password en la definición de paso! En estos casos, en lugar de empezar a cambiar todo hasta que funcione, recurrimos a la [consola de rails](http://guides.rubyonrails.org/command_line.html#rails-console):
 
-{%highlight console%}
+{%highlight irb%}
 $ rails console
-> Loading development environment (Rails 3.0.1)
-> irb(main):002:0> User.new(:email=>"jgalt@domain.net", :username=>"jgalt", :password=>"foobarbaz").save
+Loading development environment (Rails 3.0.1)
+irb(main):002:0> User.new(:email=>"jgalt@domain.net", :username=>"jgalt", :password=>"foobarbaz").save
 => true
-> irb(main):003:0> User.first.password
+irb(main):003:0> User.first.password
 => nil
 {%endhighlight%}
 
