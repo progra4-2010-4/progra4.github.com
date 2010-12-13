@@ -21,12 +21,15 @@ var Gist = new function(){
           categories: send("toLowerCase", gist.categories.split(/\s+,\s+/)),
           content: gist.content,
           created_at: new Date()
-      }));  
+      })); 
+      return localStorage.getItem(key);
     };
 
     this.search_by_category = function(category){
         var results = [];
-        for(key in localStorage){
+        var key;
+        for(var i=0; i< localStorage.length; i++){
+            key = localStorage.key(i);
             if(key=="name"){continue;}
             i = localStorage.getItem(key);
             if ((JSON.parse(i)).categories.indexOf(category.toLowerCase()) != -1){
@@ -36,17 +39,20 @@ var Gist = new function(){
         return results;
     };
 
-    this.display = function(key, item){
+    this.display = function(key){
+        item = JSON.parse(localStorage.getItem(key));
         return "<li class='gist' data-key='"+key+"'>"+item.title+"<span class='date'> "
                            +item.created_at.toLocaleString().replace(/\s+GMT.*/, "").replace(/[TZ]/, " ")+"</span></li>";
     }
 
     this.setExample = function(){
-        this.persist(guid(),
+        if(!localStorage.getItem("example")){
+        this.persist("example",
                 {title: "Ejemplo",
                  categories: "examen, progra4",
                  content: "Aquí _hay_ **markdown** y \n\t@notes.each{|n| puts n}\n `código`"
                 });
+        }
     }
 }
 
@@ -61,13 +67,14 @@ $(function(){
    }
    if(localStorage.length > 0){
     var item;
-    for(key in localStorage){
+    var key; 
+    for(var i=0; i< localStorage.length; i++){
+        key = localStorage.key(i);
         if(key=="name"){
             $("#name").text("Gists de "+localStorage.getItem(key));
             continue;
         }
-        item = JSON.parse(localStorage.getItem(key));
-        $("#gists").append(Gist.display(key, item));
+        $("#gists").append(Gist.display(key));
     }
    }
    
@@ -85,8 +92,10 @@ $(function(){
    $("#edition").submit(function(e){
     e.preventDefault();
     var key = guid();
-    var item = Gist.persist(key, $(this).serialize());
-    $("#gists").append(Gist.display(key, item));
+    Gist.persist(key, {title: $("[name='title']").val(), 
+                                  categories:  $("[name='categories']").val(),
+                                  content:  $("[name='content']").val()});
+    $("#gists").append(Gist.display(key));
    });
 
    $("#add").click(function(e){
