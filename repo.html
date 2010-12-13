@@ -15,9 +15,10 @@
     <style type="text/css" media="screen">
        body{
             font-family: Courier, monospace;
-            width: 900px;
+            width: 950px;
             margin: 0 auto;
             padding-top: 50px;
+            background: #DDD url(http://24ways.org/img/body.gif) repeat fixed 0px 0px;
         }
         em{
             background-color: #FFF666;
@@ -29,10 +30,19 @@
         }
         #workstation{
             float: left;
+            background-color: rgba(255, 255, 255, 0.746094);
+            border: 1px dotted;
+            width: 450px;
+            min-height: 450px;
         }
 
         #history{
             float: right;
+        }
+
+        .date{
+            font-size: 0.7em;
+            color: gray;
         }
 
         #gists{
@@ -41,7 +51,9 @@
 
         .gist:hover {
             background-color: #FFF666; 
+            cursor: pointer;
         }
+
     </style>
     <title>Hackutils</title> 
   </head> 
@@ -58,8 +70,8 @@
       * El código fuente está aquí, pero está ofuscado ;)
       -->
       <div id="workstation">
-          <a href="/gists/new" id="add">Agregar nueva nota rápida</a>
           <form id="edition" action="/gists/create">
+              <h2>Agregando nota</h2>
               <p>
               <input type="text" name="title" placeholder="poné un título"0>
               </p><p>
@@ -71,7 +83,10 @@
               <input type="submit" value="Add"0>
               </p>
           </form>
-          <div id="display"></div>
+          <div id="display">
+              <a href="/gists/new" id="add">Agregar nueva nota rápida</a>
+              <div id="note"></div>
+          </div>
       </div>
       <div id="history">
           <h2>Todas tus notas</h2>

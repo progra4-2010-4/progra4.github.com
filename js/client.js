@@ -41,8 +41,10 @@ var Gist = new function(){
 
     this.display = function(key){
         item = JSON.parse(localStorage.getItem(key));
+        item.created_at = new Date(item.created_at);
         return "<li class='gist' data-key='"+key+"'>"+item.title+"<span class='date'> "
-                           +item.created_at.toLocaleString().replace(/\s+GMT.*/, "").replace(/[TZ]/, " ")+"</span></li>";
+                           +item.created_at.toLocaleDateString()
+                           +"(a las "+item.created_at.toLocaleTimeString()+")</span></li>";
     }
 
     this.setExample = function(){
@@ -86,7 +88,8 @@ $(function(){
     }
     var gist = JSON.parse(localStorage.getItem(tgt.data("key")));
     $("#edition").hide();
-    $("#display").html(converter.makeHtml(gist.content)).show();
+    $("#display").show();
+    $("#note").html(converter.makeHtml(gist.content));
     $('pre code', $("#display")).each(function(i, e) {hljs.highlightBlock(e)});    
    });
 
