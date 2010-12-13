@@ -92,9 +92,15 @@ $(function(){
     $("#note").html(converter.makeHtml(gist.content));
     $('pre code', $("#display")).each(function(i, e) {hljs.highlightBlock(e)});    
    });
-
+   $("[name='title']").focus(function(){
+    $(".error").remove();
+   });
    $("#edition").submit(function(e){
     e.preventDefault();
+    if($("[name='title']").val() == ""){
+        $("[name='title']").before("<span class='error'>El título no puede estar en blanco</span>");
+        return false;
+    }
     var key = guid();
     Gist.persist(key, {title: $("[name='title']").val(), 
                                   categories:  $("[name='categories']").val(),
