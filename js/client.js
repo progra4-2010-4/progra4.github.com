@@ -18,7 +18,7 @@ var Gist = new function(){
     this.persist = function(key, gist){
       localStorage.setItem(key, JSON.stringify({
           title: gist.title,
-          categories: send("toLowerCase", gist.categories.split(/\s+,\s+/)),
+          categories: send("toLowerCase", gist.categories.split(/\s*,\s*/)),
           content: gist.content,
           created_at: new Date()
       })); 
@@ -31,9 +31,10 @@ var Gist = new function(){
         for(var i=0; i< localStorage.length; i++){
             key = localStorage.key(i);
             if(key=="name"){continue;}
-            i = localStorage.getItem(key);
-            if ((JSON.parse(i)).categories.indexOf(category.toLowerCase()) != -1){
-                results.push(i);
+            i = JSON.parse(localStorage.getItem(key));
+            console.log(i);
+            if (i.categories.indexOf(category.toLowerCase()) != -1){
+                results.push(key);
             }
         }
         return results;
@@ -42,6 +43,7 @@ var Gist = new function(){
     this.display = function(key){
         item = JSON.parse(localStorage.getItem(key));
         item.created_at = new Date(item.created_at);
+        updateCategories(item.categories);
         return "<li class='gist' data-key='"+key+"'>"+item.title+"<span class='date'> "
                            +item.created_at.toLocaleDateString()
                            +"(a las "+item.created_at.toLocaleTimeString()+")</span></li>";
@@ -56,8 +58,29 @@ var Gist = new function(){
                 });
         }
     }
+
 }
 
+
+function updateCategories(ary){
+    if(typeof ary == "string"){
+        ary = send("toLowerCase", gist.categories.split(/\s*,\s*/));
+    }
+    for(var i=0;i<ary.length;i++){
+        if(!$("#categories option[value='"+ary[i].toLowerCase()+"']").length){
+            $("#categories").append("<option value='"+ary[i]+"'>"+ary[i]+"</option>");
+        }
+    }
+}
+
+function displayAll(){
+    var item;
+    var key; 
+    for(var i=0; i< localStorage.length; i++){
+        key = localStorage.key(i);
+        $("#gists").append(Gist.display(key));
+    }
+}
 
 $(function(){
    $("#display").hide();
@@ -69,16 +92,7 @@ $(function(){
     alert("Este browser no soporta html5, favor probar en otro");
    }
    if(localStorage.length > 0){
-    var item;
-    var key; 
-    for(var i=0; i< localStorage.length; i++){
-        key = localStorage.key(i);
-        if(key=="name"){
-            $("#name").text("Gists de "+localStorage.getItem(key));
-            continue;
-        }
-        $("#gists").append(Gist.display(key));
-    }
+       displayAll();
    }
    
    $(".gist").live('click', function(e){
@@ -113,5 +127,19 @@ $(function(){
     e.preventDefault();
     $("#edition").show();
     $("#display").hide();
+   });
+
+   $("#categories").change(function(){
+       if($(this).val()=="Todas"){
+        $("#prompt").text("Todas las notas");
+        displayAll();
+        return;
+       }
+       var cats = Gist.search_by_category($(this).val());
+       $("#gists").empty();
+       $("#prompt").text("Notas con la categoría '"+$(this).val()+"'");
+       for(var i; i<cats.length;i++){
+        $("#gists").append(Gist.display(cats[i]));
+       }
    });
 });
