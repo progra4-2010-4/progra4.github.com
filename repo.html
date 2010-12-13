@@ -1,0 +1,40 @@
+<!DOCTYPE html> 
+<html> 
+  <head> 
+    <meta charset='utf-8' /> 
+    <link href='/css/ui/jquery-ui-1.8.7.custom.css' rel='stylesheet' />
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/5.16/styles/github.min.css">
+    <script src='/js/jquery.js'></script> 
+    <script src='/js/jqueryui.js'></script> 
+    <script src='/js/modernizr-1.6.min.js'></script> 
+    <script src="/js/showdown.js"></script>
+    <script src="http://yandex.st/highlightjs/5.16/highlight.min.js"></script>
+    <script src='/js/client.js'></script> 
+    <title>Hackutils</title> 
+  </head> 
+  <body>
+      <!--Si estás viendo esto, te felicito, acabás de hacerte la vida fácil (o interesante):
+      resulta que este examen en realidad no requiere de ruby en el servidor, todo lo hice en javascript en el cliente.
+      * La persistencia de objetos está hecha mediante localStorage (http://diveintohtml5.org/storage.html)
+      * Les asigno llaves únicas mediante un guid (http://note19.com/2007/05/27/javascript-guid-generator/)
+      * Ninguna url va a ningún lugar, todo es mediante javascript!
+      * El parseo de markdown está hecho mediante showdown: http://attacklab.net/showdown/ (si lo bajás
+      y ves los ejemplos, verás que es fácil de usar).
+      * Y el coloreo de sintaxis está hecho mediante lo que usé en el tercer examen
+        (http://softwaremaniacs.org/soft/highlight/en/description/)
+      * El código fuente está aquí, pero está ofuscado ;)
+      -->
+      <a href="/gists/new" id="add">Agregar nueva nota rápida</a>
+      <div id="workstation">
+          <form id="edition" action="/gists/create">
+              <h2>Agregar una nueva nota rápida</h2>
+              <input type="text" name="title" placeholder="poné un título"0>
+              <input type="text" name="categories" placeholder="categorías separadas por comas"0>
+              <textarea name="content" rows="8" cols="40"></textarea>
+              <input type="submit" value="Add"0>
+          </form>
+          <div id="display"></div>
+      </div>
+      <ul id="gists"></div>
+  </body> 
+</html> 

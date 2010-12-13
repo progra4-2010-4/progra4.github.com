@@ -1,0 +1,133 @@
+---
+layout: post
+title: examen 2
+---
+#Examen 2, progra 4
+
+Como se mencionó en clase, tenés desde el viernes 19 de noviembre de 2010 a las 00:00 hasta el lunes 22 de noviembre a las 00:00 para completar este examen.
+
+Puesto que el examen se **entregará via git**, desarrollé una [pequeña página](http://turngitin.heroku.com/) donde podés ver si tus commits se subieron y cuándo se subieron, útil para cuando uno haga `push`, si está ahí, significa que está bien guardado en el servidor.
+Para las características espec
+
+##Pre-requisitos
+
+Se presupone que generaste una [llave pública ssh](http://help.github.com/key-setup-redirect) y que la entregaste apropiadamente. Además, se asume que tenés `git` y ruby instalados en tu computadora.
+
+##Recursos
+
+Se recomienda, evidentemente, tener en cuenta los [ejemplos](https://github.com/organizations/progra4) hechos en clase. Además, se debe recordar que tanto las [guías oficiales](http://guides.rubyonrails.org/) como los [tutoriales en video](http://railscasts.com/) y la [documentación del API](http://api.rubyonrails.org/) -entre [otros](http://www.engineyard.com/blog/2010/resources-for-getting-started-with-ruby-on-rails/) son de ayuda indiscutible en el desarrollo en RoR. Asimismo, no viene de más un [uso apropiado](http://rails.vim.tpope.net/) de un editor de texto y el [sistema de control de versiones](http://gitref.org/).
+
+En las secciones correspondientes se hablará de plugins y librerías recomendados para el desarrollo.
+
+##Preparación del ambiente de desarrollo
+
+La entrega del examen se hará via git, a continuación se detallan los pasos para comenzar:
+
+Esta vez **no** vas a hacer un clon de una carpeta remota ya creada, sino que crearás tu proyecto de rails desde cero y luego lo conectarás al servidor, donde ya te he dado permisos de escritura sobre un repositorio.
+
+* Tenés que crear una aplicación nueva de rails con `rails new examen2`
+* Crear historial de git con `git init`
+* Luego, *dentro de la carpeta*, tenés que conectar esa aplicación con tu repositorio remoto de git, así:
+    {%highlight console%}
+    $ git remote add origin git@lfborjas.xen.prgmr.com:NUMERODECUENTA_examen2.git
+    {%endhighlight%}
+* Te recomiendo que **inmediatamente después** de agregar el remoto, agregués tus archivos generados por rails (con `git add .`) y **hagás un commit y un push**: por ejemplo, si yo estuviera tomando el examen, haría esto en mi consola: 
+    {%highlight console%}
+    $ git add .
+    $ git commit -m 'primer commit: recién generado el proyecto de rails' 
+    $ git push origin master
+    Counting objects: 7, done.
+    Delta compression using up to 2 threads.
+    Compressing objects: 100% (3/3), done.
+    Writing objects: 100% (4/4), 356 bytes, done.
+    Total 4 (delta 2), reused 0 (delta 0)
+    remote: Tu examen fue actualizado y tu maestro notificado
+    To git@lfborjas.xen.prgmr.com:10611066.git
+       2520dcd..415e369  master -> master
+    {%endhighlight%}
+
+* Después de ese push, deberías entrar a <http://turngitin.heroku.com/> y ver, *al final* de la página, un mensaje de que vos subiste cambios. Si no te dice eso de `remote: Tu examen fue actualizado y tu maestro notificado` sino que te sale algo de `connection refused`, esperá un par de segundos y volvé a intentar. Si te sale algo de que no tenés acceso de escritura, eso es porque **no me mandaste tu clave ssh o me la mandaste mal** en cuyo caso me debés mandar un correo y seguir trabajando, lamentablemente mañana no estaré disponible para respuesta rápida.
+
+##Flujo de trabajo recomendado
+
+Para simplificar las cosas, en este examen no se incluye <span class="info">**absolutamente nada de pruebas**</span>, de modo que <span class="info">no te tenés NI que molestar en instalar cucumber o escribir features o pruebas de unidad</span>. Nada de eso, nil, nullen.
+
+Te recomiendo revisar la [aplicación de prueba](http://pasteit.heroku.com) y a la vez los [escenarios verbales](#escenarios) presentados más adelante. Tratá de ir terminando uno por uno y en el orden recomendado. Debido a que disponés de tanto tiempo, tu aplicación tiene que comportarse **igual o mejor** que la de muestra, no se aceptan excusas.
+
+**Siempre, siempre, siempre hacé commits en git: cada cosa que sabés que está bien debería tener su propio punto en la historia de git, y hasta su propio push al servidor**. 
+
+Siempre tené en mente el ciclo mvc y recordá que tanto `rake routes` como `rails server` y `rails console` son herramientas indispensables: si programás algo, probalo antes en la consola, si algo no te funciona **mirá tu aplicación en el browser** y seguí el modelo MVC: si algo está mal, está mal en alguno de esos lugares. Asimismo, recordá que cuando corrés `rails server` RoR imprime una bitácora *detallada* de todo lo que pasa en la aplicación. Por último, tratá de no repetirte y de mantener las cosas simples: si te complicás mucho, lo estás haciendo mal.
+
+##Descripción de la aplicación
+
+Como se ve en la muestra, esta aplicación es un [pastebin](http://en.wikipedia.org/wiki/Pastebin), inspirado por [pastie](http://pastie.org/) y [gist.github](https://gist.github.com/), ambas aplicaciones hechas en Ruby on Rails.
+
+La idea es simple: podés crear snippets de código y ver otros que han sido creados. Además, podés registrarte para poder llevar control de las versiones de tus snippets y optar por crearlos privados. Como ves, no hay mucho truco, es igual de simple que las que hemos hecho en clase. 
+
+#Escenarios
+
+Aunque no te puse escenarios en cucumber, aquí te describo a grandes rasgos cómo espero que se comporte tu aplicación. **Recordá que vas a tener que decidir por tu cuenta qué plugins agregar a tu Gemfile**.
+
+##Autenticación de usuarios
+
+* Un usuario debería poder registrarse con un nombre de usuario **único y no vacío**.
+* Un usuario registrado que se haya autenticado debería poder ver sus *snippets privados*
+* Ningún usuario debería poder ver los snippets privados de otros
+* Un usuario tiene que estar autenticado **y ser el propietario** de un snippet para optar por editarlo
+* Un snippet se puede crear sin propietario, en cuyo caso no debería poder ser editable.
+
+##Creación de snippets
+
+Los snippets están definidos por: un contenido en texto, un lenguaje de programación en el que están escritos y si son o no privados.
+
+* La página raíz de la aplicación **debe** ser la creación de nuevos snippets. Y **siempre** se tiene que poder regresar a ella fácilmente.
+* **Sólo** usuarios autenticados pueden crear snippets privados. 
+* Cuando se crea un snippet, debería ponerse un lenguaje por defecto (en la muestra, ruby).
+* Después de creado un snippet, se debería ir a la página de muestra del mismo.
+* La página de lista de snippets se debe mostrar [paginada](https://github.com/mislav/will_paginate) (si usás `will_paginate`, no usés `paginate_by..`, mejor usá `where(...).paginate`, hay un bug en el gem) y filtrada por usuario (sólo los snippets públicos de un usuario deberían salir), lenguaje de programación y ordenado siempre desde el más reciente hasta el más antiguo.
+* En la página de la lista de snippets se debería mostrar una vista previa (sólo las primeras n líneas) y no el snippet completo. Asimismo, se debe avisar al usuario cuántas líneas tiene el contenido y hace cuánto fue creado.
+* Cuando un usuario autenticado está en la página de un snippet que ha creado, debería poder optar por editarlo.
+
+##Características de implementación libre
+
+De las siguientes características, sólo **una** es requerida. Si hacés las dos, estás optando a cinco puntos extra. La implementación puede diferir totalmente de la página muestra, mientras sean equivalentes.
+
+* Los snippets se deben poder mostrar con sintaxis coloreada. Para ello, se recomienda [tener estos gems en cuenta](http://ruby-toolbox.com/categories/syntax_highlighting.html). **Esta es una característica libre, no tiene por qué parecerse a la página de muestra**.
+y **a la hora de mostrarlo, pero no de guardarlo** un snippet se debería poder mostrar *separado en secciones*, donde las secciones se delimitan con una línea de una forma similar a `##! nombre.extension`. Por ejemplo, un snippet guardado con contenido:
+
+        {%highlight console%}
+        !## archivo.rb
+        module Hola
+            puts %{mundo}
+        end
+
+        !## view.erb
+        <h1><%=link_to life, @earth%></h1>
+        {%endhighlight%}
+
+ se debería desplegar como:
+
+    archivo.rb
+    {%highlight ruby%}
+    module Hola
+        puts %{mundo}
+    end
+    {%endhighlight%}
+
+    view.erb
+    {%highlight erb%}
+        <h1><%=link_to life, @earth%></h1>
+    {%endhighlight%}
+    
+(esta idea fue inspirada por cómo lo hace [pastie](http://pastie.org/help#adv), así que podés hacerlo como lo hacen ellos si querés).
+
+* Poder guardar un historial de edición para los snippets y poder [comparar versiones](https://github.com/myobie/htmldiff). Esta idea fue sacada de [gist.github](https://gist.github.com/) y de [writeboard](http://writeboard.com/), así que podés crear archivos ahí y ver cómo funciona. Te recomiendo ver [estos gems](http://ruby-toolbox.com/categories/activerecord_versioning.html) y este [railscast](http://railscasts.com/episodes/177-model-versioning) para ideas de cómo hacerlo.
+
+
+<div class="info">
+Las últimas dos características son totalmente libres: no importa que tu implementación sea completamente distinta a la de laaplicación de muestra (podría ser mejor, yo decidí usar los gems más inútiles para ver si haciendo todo a pie terminaba a tiempo, y ahí hay gems que te facilitarán muchísimo el trabajo). Si te fijás, los requerimientos son más bien vagos, porque quiero ver cómo ponés creatividad en esas últimas características.
+</div>
+
+
+
+
