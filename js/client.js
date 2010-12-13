@@ -50,7 +50,7 @@ var Gist = new function(){
         this.persist("example",
                 {title: "Ejemplo",
                  categories: "examen, progra4",
-                 content: "Aquí _hay_ **markdown** y \n\t@notes.each{|n| puts n}\n `código`"
+                 content: "Aquí _hay_ **markdown** y <pre><code>@notes.each{|n| puts n}</pre></code> `código`"
                 });
         }
     }
@@ -59,6 +59,7 @@ var Gist = new function(){
 
 $(function(){
    $("#display").hide();
+   $("textarea").elastic();
    Gist.setExample();
    converter = new Showdown.converter();
 
@@ -96,10 +97,12 @@ $(function(){
                                   categories:  $("[name='categories']").val(),
                                   content:  $("[name='content']").val()});
     $("#gists").append(Gist.display(key));
+    $("[name='title'], [name='categories'], [name='content']").val("");
    });
 
    $("#add").click(function(e){
     e.preventDefault();
     $("#edition").show();
+    $("#display").hide();
    });
 });

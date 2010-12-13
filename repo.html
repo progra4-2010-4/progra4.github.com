@@ -3,13 +3,46 @@
   <head> 
     <meta charset='utf-8' /> 
     <link href='/css/ui/jquery-ui-1.8.7.custom.css' rel='stylesheet' />
+    <link rel="stylesheet" href="/css/forms.css" type="text/css" media="screen" charset="utf-8"0>
     <link rel="stylesheet" href="http://yandex.st/highlightjs/5.16/styles/github.min.css">
     <script src='/js/jquery.js'></script> 
     <script src='/js/jqueryui.js'></script> 
     <script src='/js/modernizr-1.6.min.js'></script> 
     <script src="/js/showdown.js"></script>
     <script src="http://yandex.st/highlightjs/5.16/highlight.min.js"></script>
+    <script src="/js/jquery.elastic.js"></script>
     <script src='/js/client.js'></script> 
+    <style type="text/css" media="screen">
+       body{
+            font-family: Courier, monospace;
+            width: 900px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+        em{
+            background-color: #FFF666;
+        }
+
+        a{
+            color: #06F;
+            text-decoration: none;
+        }
+        #workstation{
+            float: left;
+        }
+
+        #history{
+            float: right;
+        }
+
+        #gists{
+            list-style-type: none;
+        }
+
+        .gist:hover {
+            background-color: #FFF666; 
+        }
+    </style>
     <title>Hackutils</title> 
   </head> 
   <body>
@@ -24,17 +57,25 @@
         (http://softwaremaniacs.org/soft/highlight/en/description/)
       * El código fuente está aquí, pero está ofuscado ;)
       -->
-      <a href="/gists/new" id="add">Agregar nueva nota rápida</a>
       <div id="workstation">
+          <a href="/gists/new" id="add">Agregar nueva nota rápida</a>
           <form id="edition" action="/gists/create">
-              <h2>Agregar una nueva nota rápida</h2>
+              <p>
               <input type="text" name="title" placeholder="poné un título"0>
+              </p><p>
               <input type="text" name="categories" placeholder="categorías separadas por comas"0>
+              </p><p>
               <textarea name="content" rows="8" cols="40"></textarea>
+              </p>
+              <p>
               <input type="submit" value="Add"0>
+              </p>
           </form>
           <div id="display"></div>
       </div>
-      <ul id="gists"></div>
+      <div id="history">
+          <h2>Todas tus notas</h2>
+          <ul id="gists"></div>
+      </div>
   </body> 
 </html> 
