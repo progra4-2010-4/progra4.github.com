@@ -27,13 +27,12 @@ var Gist = new function(){
 
     this.search_by_category = function(category){
         var results = [];
-        var key;
+        var key, item;
+        console.log(localStorage.length);
         for(var i=0; i< localStorage.length; i++){
             key = localStorage.key(i);
-            if(key=="name"){continue;}
-            i = JSON.parse(localStorage.getItem(key));
-            console.log(i);
-            if (i.categories.indexOf(category.toLowerCase()) != -1){
+            item = JSON.parse(localStorage.getItem(key));
+            if (item.categories.indexOf(category.toLowerCase()) != -1){
                 results.push(key);
             }
         }
@@ -44,7 +43,9 @@ var Gist = new function(){
         item = JSON.parse(localStorage.getItem(key));
         item.created_at = new Date(item.created_at);
         updateCategories(item.categories);
-        return "<li class='gist' data-key='"+key+"'>"+item.title+"<span class='date'> "
+        return "<li class='gist' data-key='"+key+"'>"
+                +item.title.split(/\s+/).slice(0,3).join(" ").concat("...")
+                +"<span class='date'> "
                            +item.created_at.toLocaleDateString()
                            +"(a las "+item.created_at.toLocaleTimeString()+")</span></li>";
     }
@@ -76,6 +77,7 @@ function updateCategories(ary){
 function displayAll(){
     var item;
     var key; 
+    $("#gists").empty();
     for(var i=0; i< localStorage.length; i++){
         key = localStorage.key(i);
         $("#gists").append(Gist.display(key));
@@ -119,7 +121,8 @@ $(function(){
     Gist.persist(key, {title: $("[name='title']").val(), 
                                   categories:  $("[name='categories']").val(),
                                   content:  $("[name='content']").val()});
-    $("#gists").append(Gist.display(key));
+    $("#categories").val("Todas");
+    displayAll();
     $("[name='title'], [name='categories'], [name='content']").val("");
    });
 
@@ -135,10 +138,11 @@ $(function(){
         displayAll();
         return;
        }
-       var cats = Gist.search_by_category($(this).val());
        $("#gists").empty();
+       var cats = Gist.search_by_category($(this).val());
+       console.log(cats);
        $("#prompt").text("Notas con la categoría '"+$(this).val()+"'");
-       for(var i; i<cats.length;i++){
+       for(var i=0; i<cats.length;i++){
         $("#gists").append(Gist.display(cats[i]));
        }
    });
