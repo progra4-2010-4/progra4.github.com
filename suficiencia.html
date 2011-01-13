@@ -26,6 +26,10 @@
                 background-color: #FCC;
                 font-weight: bold;
             }
+
+            .grade{
+                color: green;
+            }
         </style>
     </head>
     <body>
@@ -51,32 +55,33 @@
     <p>Este examen de suficiencia pretende identificar estas competencias. </p>
     <h2>Política de entrega</h2>
     <p>El alumno tiene 24 horas para presentar el examen al docente y deberá poner el código
-    fuente final en <a href="https://github.com">github.com</a>.</p>
+    fuente final en <a href="https://github.com">github.com</a>.</p> 
     <h2>Descripción del examen</h2>
     <p>Reproducir un sub-conjunto de la funcionalidad del sitio web <a href="http://writeboard.com">writeboard.com</a>,
-    con las características enumeradas a continuación:</p>
+    con las características enumeradas a continuación (el puntaje se muestra en cursivas al final de cada elemento) :</p>
     <ol>
     <li>Formulario de creación de una writeboard: se deberá asignar una url única a la writeboard, 
-       así como un nombre y una contraseña. </li>
+    así como un nombre y una contraseña. <span class="grade">20</span></li>
     <li>Edición de una versión inicial writeboard utilizando algún lenguaje de marcado (p.e. textile, markdown o restructured text)
-       y posibilidad de guardarla, asociándola a un autor.</li>
-    <li>Posibilidad de editar una writeboard, creando una nueva versión <em>cada vez</em>, con posiblemente otro autor.</li>
-    <li>Listar las versiones de una writeboard creadas hasta la fecha, permitiéndole al usuario verlas.</li>
+       y posibilidad de guardarla, asociándola a un autor.<span class="grade">20</span></li>
+    <li>Posibilidad de editar una writeboard, creando una nueva versión <em>cada vez</em>, con posiblemente otro autor.<span class="grade">10</span></li>
+    <li>Listar las versiones de una writeboard creadas hasta la fecha, permitiéndole al usuario verlas.<span class="grade">10</span></li>
     <li>Comparar dos versiones de una writeboard, utilizando algún algoritmo o librería de <em>diff</em> y mostrar los cambios
-       entre éstas. </li>
-    <li>Permitir al usuario ver, con javascript, algún diálogo de ayuda sobre el lenguaje de marcado elegido.</li>
+       entre éstas. <span class="grade">10</span></li>
+    <li>Permitir al usuario ver, con javascript, algún diálogo de ayuda sobre el lenguaje de marcado elegido.<span class="grade">5</span></li>
     </ol>
     <p>En cuanto a la implementación concreta de la solución, se evaluará que:</p>
     <ul>
-    <li>Los documentos html sean semánticamente correctos y el estilo se aplique exclusivamente con css.</li>
+    <li>Los documentos html sean semánticamente correctos y el estilo se aplique exclusivamente con css.<span class="grade">10</span></li>
     <li>Las urls reflejen los <strong>recursos</strong> involucrados y las <strong>acciones</strong> concretas, siguiendo el modelo
-      de arquitectura REST.</li>
-    <li>El modelado de datos respete o el esquema relacional de bases de datos o el de almacenes <em>key-value</em>.</li>
+      de arquitectura REST.<span class="grade">5</span></li>
+    <li>El modelado de datos respete o el esquema relacional de bases de datos o el de almacenes <em>key-value</em>.<span class="grade">5</span></li>
     <li>Todo el código fuente necesario para la aplicación esté en un repositorio de <a href="http://git-scm.com">git</a>
       y éste esté hospedado en github. Asimismo, deberá incluir las instrucciones para ejecutarla en un ambiente
-      de desarrollo en un archivo <code>README</code>.</li>
+      de desarrollo en un archivo <code>README</code>.<span class="grade">5</span></li>
     </ul>
     <h3>Por puntaje extra</h3>
+    <span class="grade">Puede realizar cualquiera de los tres, por 5 puntos extra</span>
     <ol>
     <li>Permitir al usuario exportar una writeboard en formato html o texto plano</li>
     <li>Permitir al usuario invitar a colaboradores mediante correo electrónico.</li>
